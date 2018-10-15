@@ -22,18 +22,40 @@ namespace DrawingToolkit
         private Graphics objGraphic;
         private bool shouldPaint = false;
         double px, py, vector, angle;
-        Boolean line, rectangle, circle, triangle;
+        Boolean line, rectangle, circle, triangle,select;
         private Point preCoor, newCoor;
         private List<Point> points = new List<Point>();
         Point a, b, c;
         Point[] list = new Point[100];
         int tebal = 1, initialX, initialY;
         int cirW, cirL;
+        private const double EPSILON = 3.0;
 
 
         class Garis
         {
             public Point from, to;
+
+            public bool Intersect(int xTest, int yTest)
+            {
+                double m = GetSlope();
+                double b = to.Y - m * to.X;
+                double y_point = m * xTest + b;
+
+                if (Math.Abs(yTest - y_point) < EPSILON)
+                {
+                    /*Debug.WriteLine("Object " + ID + " is selected.");*/
+                    System.Diagnostics.Debug.WriteLine("Terpilih");
+                    return true;
+                }
+                return false;
+            }
+
+            public double GetSlope()
+            {
+                double m = (double)(to.Y - from.Y) / (double)(to.X - from.X);
+                return m;
+            }
         }
 
         class Lingkaran
@@ -103,13 +125,21 @@ namespace DrawingToolkit
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (line == false && rectangle == false && circle == false && triangle == false)
+            if (line == false && rectangle == false && circle == false && triangle == false && select==false)
             {
                 DialogResult box2;
                 box2 = MessageBox.Show("Please, Select Shape", "Error", MessageBoxButtons.RetryCancel);
                 if (box2 == DialogResult.Cancel)
                 {
                     this.Dispose();
+                }
+            }
+            else if(select==true)
+            {
+                System.Diagnostics.Debug.WriteLine("Click");
+                foreach (Garis garis in listGaris)
+                {
+                    garis.Intersect(e.X, e.Y);
                 }
             }
         }
@@ -336,12 +366,35 @@ namespace DrawingToolkit
             }
         }
 
+        private void cursorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (select == true)
+            {
+                reset();
+                buttonColor();
+            }
+            else
+            {
+                reset();
+                buttonColor();
+                select = true;
+                cursorToolStripMenuItem.BackColor = Color.Blue;
+            }
+            //System.Diagnostics.Debug.WriteLine("Double");
+            /*foreach (Garis garis in listGaris)
+            {
+                garis.Intersect(e.)
+                //objGraphic.DrawLine(p, garis.from, garis.to);
+            }*/
+        }
+
         void buttonColor()
         {
             lineToolStripMenuItem.BackColor = Color.Snow;
             circleToolStripMenuItem.BackColor = Color.Snow;
             rectangleToolStripMenuItem.BackColor = Color.Snow;
             undoToolStripMenuItem.BackColor = Color.Snow;
+            cursorToolStripMenuItem.BackColor = Color.Snow;
         }
 
         void reset()
@@ -350,6 +403,7 @@ namespace DrawingToolkit
             rectangle = false;
             circle = false;
             triangle = false;
+            select = false;
         }
 
 

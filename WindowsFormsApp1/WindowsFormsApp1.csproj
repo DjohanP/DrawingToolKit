@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15655708-0E25-4AA1-92B7-B26FE1BB31EC}</ProjectGuid>
+    <ProjectGuid>{56AD0103-6A9C-4BF5-8CBB-725425CF453D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DrawingToolkit</RootNamespace>
-    <AssemblyName>DrawingToolkit</AssemblyName>
+    <RootNamespace>WindowsFormsApp1</RootNamespace>
+    <AssemblyName>WindowsFormsApp1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,30 +52,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\AObject.cs" />
-    <Compile Include="Interface\ATool.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Object\Circle.cs" />
-    <Compile Include="Object\Rectangle.cs" />
-    <Compile Include="Object\Line.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tool\CircleTool.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Tool\LineTool.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Tool\RectangleTool.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Tool\SelectTool.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -84,7 +62,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -98,15 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Editing-Line-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\circle-icon-png-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rectangle-png-3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

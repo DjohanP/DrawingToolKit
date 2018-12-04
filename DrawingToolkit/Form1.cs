@@ -1,4 +1,4 @@
-﻿using DrawingToolkit.Interface;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using DrawingToolkit.Tool;
 using System;
@@ -33,11 +33,20 @@ namespace DrawingToolkit
         private RectangleTool rectangleTool = new RectangleTool();
         private SelectTool selectTool = new SelectTool();
         List<AObject> listObject = new List<AObject>();
+        private LinkedList<AObject> drawables = new LinkedList<AObject>();
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            foreach(AObject Object in listObject)
+            //deselectObject();
+            /*foreach(AObject Object in listObject)
             {
+                Object.Deselect();
+                Object.Draw();
+            }*/
+            //base.OnPaint(e);
+            foreach (AObject Object in drawables)
+            {
+                //Object.Deselect();
                 Object.Draw();
             }
         }
@@ -53,9 +62,9 @@ namespace DrawingToolkit
                     this.Dispose();
                 }
             }
-            else if (select == true)
+            else if (selectTool.isActive == true)
             {
-                deselectObject();
+                /*deselectObject();
                 initial = e.Location;
                 foreach (AObject Object in listObject)
                 {
@@ -67,6 +76,12 @@ namespace DrawingToolkit
                         Object.DrawHandle();
                         break;
                     }
+                }*/
+                //if (toolSelected.MouseClick(sender,e,listObject)==true)
+                if (toolSelected.MouseClick(sender, e, drawables) == true)
+                {
+                    //System.Diagnostics.Debug.WriteLine("Bisa");
+                    shouldPaint = true;
                 }
             }
         }
@@ -77,11 +92,13 @@ namespace DrawingToolkit
             if (e.Button == MouseButtons.Left&&toolSelected!=null)
             {
                 shouldPaint = true;
-                toolSelected.MouseDown(sender, e, panel1, listObject);
+                //toolSelected.MouseDown(sender, e, panel1, listObject);
+                toolSelected.MouseDown(sender, e, panel1, drawables);
             }
-            else if (select == true && e.Button == MouseButtons.Left)
+            /*else if (selectTool.isActive == true && e.Button == MouseButtons.Left)
             {
-                shouldPaint = true;
+                toolSelected.MouseDown(sender, e, panel1, listObject);
+                //shouldPaint = true;
                 initial = e.Location;
                 if (objectSelected == null)
                 {
@@ -105,7 +122,7 @@ namespace DrawingToolkit
                     System.Diagnostics.Debug.WriteLine(posisiClick);
                 }
                 panel1.Invalidate();
-            }
+            }*/
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
@@ -113,13 +130,17 @@ namespace DrawingToolkit
             if(toolSelected!=null&& shouldPaint==true)
             {
                 this.Refresh();
-                toolSelected.MouseMove(sender, e, panel1, listObject);
+                //toolSelected.MouseMove(sender, e, panel1, listObject);
+                toolSelected.MouseMove(sender, e, panel1, drawables);
+                this.Invalidate();
             }
-            else if (select == true&&shouldPaint==true)
+            /*else if (select == true&&shouldPaint==true)
             {
-                System.Diagnostics.Debug.WriteLine("MAsukoii");
+                this.Refresh();
+                toolSelected.MouseMove(sender, e, panel1, listObject);
                 if (posisiClick != -1)
                 {
+                    System.Diagnostics.Debug.WriteLine("Masukoii");
                     this.Refresh();
                     objectSelected.Resize(posisiClick, e.Location);
                     objectSelected.Draw();
@@ -128,32 +149,59 @@ namespace DrawingToolkit
                 }
                 else
                 {
+                    System.Diagnostics.Debug.WriteLine("Masuk"+posisiClick);
                     this.Refresh();
                     objectSelected.Translate(e.X - initial.X, e.Y - initial.Y);
                     //System.Diagnostics.Debug.WriteLine("objectSelected.from");
                     initial = e.Location;
-                    objectSelected.Draw();
+                    objectSelected.DrawObject();//masalah
                     objectSelected.DrawHandle();
                 }
-            }
+            }*/
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             panel1.Cursor = Cursors.Default;
-            if(toolSelected!=null&& shouldPaint==true)
-            {
-                listObject.Add(toolSelected.MouseUp(sender, e, panel1, listObject));
-                shouldPaint = false;
-            }
-            else if(shouldPaint==true&&select==true)
+            if (shouldPaint == true && selectTool.isActive == true)
             {
                 shouldPaint = false;
             }
+            else if (toolSelected!=null&& shouldPaint==true)
+            {
+                //listObject.Add(toolSelected.MouseUp(sender, e, panel1, listObject));
+                drawables.AddLast(toolSelected.MouseUp(sender, e, panel1, drawables));
+                shouldPaint = false;
+            }
+            this.Invalidate();
         }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " pressed.");
+            if (toolSelected != null && selectTool.isActive)
+            {
+                toolSelected.KeyDown(sender, e,panel1);
+            }
+            //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " pressed.");
+            this.Refresh();
+            /*this.Invalidate();*/
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " pressed2.");
+        }
+
 
         private void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Refresh();
             if (lineTool.isActive==false)
             {
                 reset();
@@ -173,6 +221,7 @@ namespace DrawingToolkit
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Refresh();
             if (circleTool.isActive == false)
             {
                 reset();
@@ -192,6 +241,7 @@ namespace DrawingToolkit
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Refresh();
             if (rectangleTool.isActive == false)
             {
                 reset();
@@ -211,25 +261,38 @@ namespace DrawingToolkit
 
         private void cursorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (select == true)
+            this.Refresh();
+            if (select == false)
             {
-                reset();
+                /*reset();
                 toolSelected = null;
+                buttonColor();*/
+                reset();
+                selectTool.isActive = true;
+                selectTool.ParentForm = this;
+                toolSelected = selectTool;
                 buttonColor();
+                cursorToolStripMenuItem.BackColor = Color.Blue;
             }
             else
             {
-                reset();
+                /*reset();
                 toolSelected = null;
                 buttonColor();
                 select = true;
-                cursorToolStripMenuItem.BackColor = Color.Blue;
+                cursorToolStripMenuItem.BackColor = Color.Blue;*/
+                reset();
+                toolSelected = null;
+                selectTool.isActive = false;
+                buttonColor();
             }
         }
 
         private void undoToolStripMenuItem_Click(object sender,EventArgs e)
         {
-            if(!listObject.Any())
+            reset();
+            this.Refresh();
+            if (!drawables.Any())
             {
                 DialogResult box2;
                 box2 = MessageBox.Show("Belum Ada Tindakan", "Error", MessageBoxButtons.RetryCancel);
@@ -240,7 +303,8 @@ namespace DrawingToolkit
             }
             else
             {
-                listObject.RemoveAt(listObject.Count - 1);
+                //listObject.RemoveAt(listObject.Count - 1);
+                drawables.RemoveLast();
                 this.Refresh();
             }
         }
@@ -248,10 +312,17 @@ namespace DrawingToolkit
         private void deselectObject()
         {
             posisiClick = -1;
-            foreach (AObject Object in listObject)
+            /*foreach (AObject Object in listObject)
             {
-                Object.DrawStatic();
+                Object.Deselect();
+                //Object.DrawStatic();
+            }*/
+            foreach(AObject Object in drawables)
+            {
+                Object.Deselect();
+                Object.Draw();
             }
+            this.Refresh();
         }
 
         void buttonColor()
@@ -293,6 +364,16 @@ namespace DrawingToolkit
             }
             else
             { e.Cancel = true; }
+        }
+
+        public void Remove_Object(AObject Object)
+        {
+            drawables.Remove(Object);
+        }
+
+        public void Add_Object(AObject Object)
+        {
+            drawables.AddLast(Object);
         }
     }
 }

@@ -27,10 +27,28 @@ namespace DrawingToolkit.Object
             this.from = awal;
         }
 
-        public override void Draw()
+        public override void DrawObject()
         {
             this.getGraphics().SmoothingMode = SmoothingMode.AntiAlias;
             this.getGraphics().DrawLine(p, from, to);
+        }
+
+        public override void DrawPreview()
+        {
+            this.p.Color = Color.Red;
+            DrawObject();
+        }
+
+        public override void DrawEdit()
+        {
+            this.p.Color = Color.Blue;
+            DrawObject();
+        }
+
+        public override void DrawStatic()
+        {
+            this.p.Color = Color.Black;
+            DrawObject();
         }
 
         public override Boolean Select(Point posisi)
@@ -42,7 +60,7 @@ namespace DrawingToolkit.Object
             if (Math.Abs(posisi.Y - y_point) < EPSILON)
             {
                 /*Debug.WriteLine("Object " + ID + " is selected.");*/
-                System.Diagnostics.Debug.WriteLine("Garis Terpilih");
+                //System.Diagnostics.Debug.WriteLine("Garis Terpilih");
                 return true;
             }
             return false;
@@ -53,18 +71,7 @@ namespace DrawingToolkit.Object
             double m = (double)(to.Y - from.Y) / (double)(to.X - from.X);
             return m;
         }
-
-        public override void DrawEdit()
-        {
-            this.p.Color = Color.Blue;
-            Draw();
-        }
-
-        public override void DrawStatic()
-        {
-            this.p.Color = Color.Black;
-            Draw();
-        }
+        
 
         public override void Translate(int difX, int difY)
         {

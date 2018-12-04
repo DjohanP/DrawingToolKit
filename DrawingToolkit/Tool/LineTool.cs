@@ -21,13 +21,13 @@ namespace DrawingToolkit.Tool
         }
 
 
-        public override bool MouseClick(object sender, MouseEventArgs e, List<AObject> listObject)
+        public override bool MouseClick(object sender, MouseEventArgs e, LinkedList<AObject> listObject)
         {
             System.Diagnostics.Debug.WriteLine("Click");
             return true;
         }
 
-        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             this.lineObject = new Line(e.Location);
             System.Diagnostics.Debug.WriteLine(lineObject.from);
@@ -37,18 +37,31 @@ namespace DrawingToolkit.Tool
             panel1.Invalidate();
         }
 
-        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             this.lineObject.to = e.Location;
             this.lineObject.Draw();
         }
 
-        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             lineObject.to = e.Location;
-            lineObject.Draw();
+            //lineObject.Draw();
             //listObject.Add(lineObject);
+            //lineObject.Select();
+            lineObject.Deselect();
+            lineObject.Draw();
             return lineObject;
+        }
+
+        public override void KeyUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyDown(object sender, KeyEventArgs e, Panel panel1)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,13 +13,13 @@ namespace DrawingToolkit.Tool
     {
         public bool isActive { set; get; }
         private Rectangle rectangleObject;
-        public override bool MouseClick(object sender, MouseEventArgs e, List<AObject> listObject)
+        public override bool MouseClick(object sender, MouseEventArgs e, LinkedList<AObject> listObject)
         {
             System.Diagnostics.Debug.WriteLine("Click");
             return true;
         }
 
-        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             rectangleObject = new Rectangle(e.Location);
             rectangleObject.to = e.Location;
@@ -28,7 +28,7 @@ namespace DrawingToolkit.Tool
             panel1.Invalidate();
         }
 
-        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             rectangleObject.to = e.Location;
             rectangleObject.Width = Math.Abs(e.X - rectangleObject.from.X);
@@ -36,13 +36,26 @@ namespace DrawingToolkit.Tool
             rectangleObject.Draw();
         }
 
-        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             rectangleObject.to = e.Location;
             rectangleObject.Width = Math.Abs(e.X - rectangleObject.from.X);
             rectangleObject.Height = Math.Abs(e.Y - rectangleObject.from.Y);
+            //rectangleObject.DrawEdit();
+            //rectangleObject.Select();
+            rectangleObject.Deselect();
             rectangleObject.Draw();
             return rectangleObject;
+        }
+
+        public override void KeyUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyDown(object sender, KeyEventArgs e, Panel panel1)
+        {
+            throw new NotImplementedException();
         }
     }
 }

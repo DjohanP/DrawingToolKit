@@ -14,13 +14,13 @@ namespace DrawingToolkit.Tool
         public bool isActive { set; get; }
         private Circle circleObject;
 
-        public override bool MouseClick(object sender, MouseEventArgs e, List<AObject> listObject)
+        public override bool MouseClick(object sender, MouseEventArgs e, LinkedList<AObject> listObject)
         {
             System.Diagnostics.Debug.WriteLine("Click");
             return true;
         }
 
-        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseDown(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             circleObject = new Circle(e.Location);
             circleObject.to = e.Location;
@@ -29,7 +29,7 @@ namespace DrawingToolkit.Tool
             panel1.Invalidate();
         }
 
-        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override void MouseMove(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             circleObject.to = e.Location;
             circleObject.Width = Math.Abs(e.X - circleObject.from.X);
@@ -37,13 +37,25 @@ namespace DrawingToolkit.Tool
             circleObject.Draw();
         }
 
-        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, List<AObject> listObject)
+        public override AObject MouseUp(object sender, MouseEventArgs e, Panel panel1, LinkedList<AObject> listObject)
         {
             circleObject.to = e.Location;
             circleObject.Width = Math.Abs(e.X - circleObject.from.X);
             circleObject.Height = Math.Abs(e.Y - circleObject.from.Y);
+            //circleObject.Select();
+            circleObject.Deselect();
             circleObject.Draw();
             return circleObject;
+        }
+
+        public override void KeyUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void KeyDown(object sender, KeyEventArgs e, Panel panel1)
+        {
+            throw new NotImplementedException();
         }
     }
 }

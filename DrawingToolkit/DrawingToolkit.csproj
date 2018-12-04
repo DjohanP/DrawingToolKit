@@ -56,11 +56,16 @@
     <Compile Include="Interface\ATool.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Interface\ADrawingState.cs" />
     <Compile Include="Object\Circle.cs" />
+    <Compile Include="Object\GroupObject.cs" />
     <Compile Include="Object\Rectangle.cs" />
     <Compile Include="Object\Line.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\EditState.cs" />
+    <Compile Include="State\PreviewState.cs" />
+    <Compile Include="State\StaticState.cs" />
     <Compile Include="Tool\CircleTool.cs">
       <SubType>Component</SubType>
     </Compile>

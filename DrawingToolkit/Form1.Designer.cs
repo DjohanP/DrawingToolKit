@@ -35,8 +35,8 @@
             this.circleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.cursorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,6 +102,13 @@
             this.undoToolStripMenuItem.Text = "Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
+            // cursorToolStripMenuItem
+            // 
+            this.cursorToolStripMenuItem.Name = "cursorToolStripMenuItem";
+            this.cursorToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.cursorToolStripMenuItem.Text = "Cursor";
+            this.cursorToolStripMenuItem.Click += new System.EventHandler(this.cursorToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(2, 75);
@@ -113,13 +120,6 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
-            // 
-            // cursorToolStripMenuItem
-            // 
-            this.cursorToolStripMenuItem.Name = "cursorToolStripMenuItem";
-            this.cursorToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.cursorToolStripMenuItem.Text = "Cursor";
-            this.cursorToolStripMenuItem.Click += new System.EventHandler(this.cursorToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -134,6 +134,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.menuStrip3.ResumeLayout(false);
             this.menuStrip3.PerformLayout();
             this.ResumeLayout(false);

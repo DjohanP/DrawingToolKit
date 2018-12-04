@@ -11,8 +11,8 @@ namespace DrawingToolkit.Object
 {
     class Circle : AObject
     {
-        public Point from { get; set; }
-        public Point to { get; set; }
+        //public Point from { get; set; }
+        //public Point to { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         private Pen p;
@@ -30,7 +30,7 @@ namespace DrawingToolkit.Object
             this.Width = 0;
         }
 
-        public override void Draw()
+        public override void DrawObject()
         {
             int cirW = Math.Abs(to.X - from.X);
             int cirL = Math.Abs(to.Y - from.Y);
@@ -42,26 +42,32 @@ namespace DrawingToolkit.Object
             this.getGraphics().DrawEllipse(p, rec);
         }
 
-        public override Boolean Select(Point posisi)
+        public override void DrawPreview()
         {
-            if ((posisi.X >= from.X && posisi.X <= from.X + Width) && (posisi.Y >= from.Y && posisi.Y <= from.Y + Height))
-            {
-                System.Diagnostics.Debug.WriteLine("Circle Terpilih");
-                return true;
-            }
-            return false;
+            this.p.Color = Color.Red;
+            DrawObject();
         }
 
         public override void DrawEdit()
         {
             this.p.Color = Color.Blue;
-            Draw();
+            DrawObject();
         }
 
         public override void DrawStatic()
         {
             this.p.Color = Color.Black;
-            Draw();
+            DrawObject();
+        }
+
+        public override Boolean Select(Point posisi)
+        {
+            if ((posisi.X >= from.X && posisi.X <= from.X + Width) && (posisi.Y >= from.Y && posisi.Y <= from.Y + Height))
+            {
+                //System.Diagnostics.Debug.WriteLine("Circle Terpilih");
+                return true;
+            }
+            return false;
         }
 
         public override void Translate(int difX, int difY)

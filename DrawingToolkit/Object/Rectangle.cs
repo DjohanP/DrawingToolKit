@@ -74,6 +74,9 @@ namespace DrawingToolkit.Object
         {
             this.from = new Point(this.from.X + difX, this.from.Y + difY);
             this.to = new Point(this.to.X + difX, this.to.Y + difY);
+
+            this.centerPoint = new Point(this.centerPoint.X + difX, this.centerPoint.Y + difY);
+            notify(difX,difY);
         }
 
         public override Point GetHandlePoint(int value)

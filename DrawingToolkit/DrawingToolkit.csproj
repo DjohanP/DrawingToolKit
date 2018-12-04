@@ -57,7 +57,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Interface\ADrawingState.cs" />
+    <Compile Include="Interface\IObserver.cs" />
+    <Compile Include="Interface\Observerable.cs" />
     <Compile Include="Object\Circle.cs" />
+    <Compile Include="Object\Connector.cs" />
     <Compile Include="Object\GroupObject.cs" />
     <Compile Include="Object\Rectangle.cs" />
     <Compile Include="Object\Line.cs" />
@@ -67,6 +70,9 @@
     <Compile Include="State\PreviewState.cs" />
     <Compile Include="State\StaticState.cs" />
     <Compile Include="Tool\CircleTool.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\ConnectorTool.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tool\LineTool.cs">
@@ -112,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\rectangle-png-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connector.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

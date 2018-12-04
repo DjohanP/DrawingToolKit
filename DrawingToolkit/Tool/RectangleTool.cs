@@ -43,6 +43,7 @@ namespace DrawingToolkit.Tool
             rectangleObject.Height = Math.Abs(e.Y - rectangleObject.from.Y);
             //rectangleObject.DrawEdit();
             //rectangleObject.Select();
+            rectangleObject.centerPoint = new System.Drawing.Point(Math.Abs(rectangleObject.from.X - rectangleObject.to.X)/2, Math.Abs(rectangleObject.from.Y - rectangleObject.to.Y) / 2);
             rectangleObject.Deselect();
             rectangleObject.Draw();
             return rectangleObject;

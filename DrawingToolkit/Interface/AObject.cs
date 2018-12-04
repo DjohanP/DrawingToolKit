@@ -9,10 +9,11 @@ using DrawingToolkit.State;
 
 namespace DrawingToolkit.Interface
 {
-    public abstract class AObject
+    public abstract class AObject: Observerable
     {
         public Point from { get; set; }
         public Point to { get; set; }
+        public Point centerPoint { get; set; }
         public ADrawingState State
         {
             get

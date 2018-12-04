@@ -34,6 +34,7 @@
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cursorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -62,6 +63,7 @@
             this.lineToolStripMenuItem,
             this.circleToolStripMenuItem,
             this.rectangleToolStripMenuItem,
+            this.connectorToolStripMenuItem,
             this.undoToolStripMenuItem,
             this.cursorToolStripMenuItem});
             this.menuStrip3.Location = new System.Drawing.Point(0, 0);
@@ -94,6 +96,14 @@
             this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.rectangleToolStripMenuItem.Text = "Rectangle";
             this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.rectangleToolStripMenuItem_Click);
+            // 
+            // connectorToolStripMenuItem
+            // 
+            this.connectorToolStripMenuItem.Image = global::DrawingToolkit.Properties.Resources.connector;
+            this.connectorToolStripMenuItem.Name = "connectorToolStripMenuItem";
+            this.connectorToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.connectorToolStripMenuItem.Text = "Connector";
+            this.connectorToolStripMenuItem.Click += new System.EventHandler(this.connectorToolStripMenuItem_Click);
             // 
             // undoToolStripMenuItem
             // 
@@ -155,6 +165,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cursorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectorToolStripMenuItem;
     }
 }
 

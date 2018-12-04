@@ -32,6 +32,7 @@ namespace DrawingToolkit
         private CircleTool circleTool = new CircleTool();
         private RectangleTool rectangleTool = new RectangleTool();
         private SelectTool selectTool = new SelectTool();
+        private ConnectorTool connectorTool = new ConnectorTool();
         List<AObject> listObject = new List<AObject>();
         private LinkedList<AObject> drawables = new LinkedList<AObject>();
 
@@ -170,7 +171,11 @@ namespace DrawingToolkit
             else if (toolSelected!=null&& shouldPaint==true)
             {
                 //listObject.Add(toolSelected.MouseUp(sender, e, panel1, listObject));
-                drawables.AddLast(toolSelected.MouseUp(sender, e, panel1, drawables));
+                AObject objectPaint= toolSelected.MouseUp(sender, e, panel1, drawables);
+                if(objectPaint!=null)
+                {
+                    drawables.AddLast(toolSelected.MouseUp(sender, e, panel1, drawables));
+                }
                 shouldPaint = false;
             }
             this.Invalidate();
@@ -288,6 +293,26 @@ namespace DrawingToolkit
             }
         }
 
+        private void connectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Refresh();
+            if (connectorTool.isActive == false)
+            {
+                reset();
+                connectorTool.isActive = true;
+                toolSelected = connectorTool;
+                buttonColor();
+                connectorToolStripMenuItem.BackColor = Color.Blue;
+            }
+            else
+            {
+                reset();
+                toolSelected = null;
+                connectorTool.isActive = false;
+                buttonColor();
+            }
+        }
+
         private void undoToolStripMenuItem_Click(object sender,EventArgs e)
         {
             reset();
@@ -329,6 +354,7 @@ namespace DrawingToolkit
         {
             lineToolStripMenuItem.BackColor = Color.Snow;
             circleToolStripMenuItem.BackColor = Color.Snow;
+            connectorToolStripMenuItem.BackColor = Color.Snow;
             rectangleToolStripMenuItem.BackColor = Color.Snow;
             undoToolStripMenuItem.BackColor = Color.Snow;
             cursorToolStripMenuItem.BackColor = Color.Snow;

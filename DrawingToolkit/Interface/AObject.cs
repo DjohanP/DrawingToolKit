@@ -46,6 +46,11 @@ namespace DrawingToolkit.Interface
 
         }
 
+        public virtual LinkedList<AObject> RemoveChild()
+        {
+            return null;
+        }
+
         /*public abstract void RenderOnPreview();
         public abstract void RenderOnEditingView();
         public abstract void RenderOnStaticView();*/

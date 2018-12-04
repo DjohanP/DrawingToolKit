@@ -230,6 +230,18 @@ namespace DrawingToolkit.Tool
                 //panel1.Invalidate();
                 //panel1.Refresh();
             }
+            else if(e.Control&&e.Shift&&e.KeyCode==Keys.G&&objectSelected!=null)
+            {
+                LinkedList<AObject> child=objectSelected.RemoveChild();
+                ParentForm.Remove_Object(objectSelected);
+                foreach(AObject aObject in child)
+                {
+                    ParentForm.Add_Object(aObject);
+                }
+                objectSelected = null;
+                panel1.Refresh();
+                panel1.Invalidate();
+            }
             else if(e.Control)
             {
                 //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " Control Saja.");

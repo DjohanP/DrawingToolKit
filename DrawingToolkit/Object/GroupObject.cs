@@ -24,13 +24,14 @@ namespace DrawingToolkit.Object
             p.Width = 2;
             this.from = new Point(int.MaxValue, int.MaxValue);
             this.to = new Point(int.MinValue, int.MinValue);
+            this.Width = 0;
+            this.Height = 0;
         }
 
         public override void AddChild(LinkedList<AObject> listChild)
         {
             foreach(AObject aObject in listChild)
             {
-                //System.Diagnostics.Debug.WriteLine("Dari" + aObject.from + "\nSampai:" + aObject.to);
                 if(this.from.X>aObject.from.X)
                 {
                     this.from = new Point(aObject.from.X,this.from.Y);
@@ -49,8 +50,14 @@ namespace DrawingToolkit.Object
                 }
                 childs.AddLast(aObject);
             }
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
             //System.Diagnostics.Debug.WriteLine("Baru ini Dari" + this.from + "\nSampai:" + this.to);
-            //DrawObject();
+        }
+
+        public override LinkedList<AObject> RemoveChild()
+        {
+            return childs;
         }
 
         public override void DrawObject()
@@ -114,11 +121,16 @@ namespace DrawingToolkit.Object
 
         public override bool Select(Point posisi)
         {
-            foreach(AObject aObject in childs)
+            /*if ((posisi.X >= from.X && posisi.X <= from.X + Width) && (posisi.Y >= from.Y && posisi.Y <= from.Y + Height))
+            {
+                //System.Diagnostics.Debug.WriteLine("Kotak Terpilih");
+                return true;
+            }*/
+            foreach (AObject aObject in childs)
             {
                 if(aObject.Select(posisi))
                 {
-                    System.Diagnostics.Debug.WriteLine("Kotak Terpilih");
+                    //System.Diagnostics.Debug.WriteLine("Kotak Terpilih");
                     return true;
                 }
             }

@@ -74,7 +74,10 @@ namespace DrawingToolkit.Tool
             }
             connectorObject.first.attach(this.connectorObject);
             connectorObject.last.attach(this.connectorObject);
-            //panel1.Invalidate();
+
+            connectorObject.from = new Point((connectorObject.first.from.X + connectorObject.first.to.X) / 2, (connectorObject.first.from.Y + connectorObject.first.to.Y) / 2);
+            connectorObject.to = new Point((connectorObject.last.from.X + connectorObject.last.to.X) / 2, (connectorObject.last.from.Y + connectorObject.last.to.Y) / 2);
+            panel1.Invalidate();
             //panel1.Refresh();
             return connectorObject;
         }

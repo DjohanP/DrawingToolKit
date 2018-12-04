@@ -95,15 +95,15 @@ namespace DrawingToolkit.Object
             
         }
 
-        public void Update(Observerable observable,int difX,int difY)
+        public void Update(Observerable observable)
         {
             if (observable == this.first)
             {
-                this.from = new Point(this.from.X + difX, this.from.Y + difY);
+                this.from = new Point((this.first.from.X+this.first.to.X)/2,(this.first.from.Y+this.first.to.Y)/2);
             }
             else if (observable == this.last)
             {
-                this.to = new Point(this.to.X + difX, this.to.Y + difY);
+                this.to = new Point((this.last.from.X + this.last.to.X) / 2, (this.last.from.Y + this.last.to.Y) / 2);
             }
         }
     }

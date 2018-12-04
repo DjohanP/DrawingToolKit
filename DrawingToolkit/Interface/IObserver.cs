@@ -8,6 +8,6 @@ namespace DrawingToolkit.Interface
 {
     public interface IObserver//yang mengamati
     {
-        void Update(Observerable observable,int difX,int difY);
+        void Update(Observerable observable);
     }
 }

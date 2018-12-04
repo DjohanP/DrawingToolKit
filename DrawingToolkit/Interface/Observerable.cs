@@ -20,11 +20,11 @@ namespace DrawingToolkit.Interface
             listObserver.Remove(observer);
         }
 
-        public void notify(int difX,int difY)
+        public void notify()
         {
             foreach(IObserver observer in this.listObserver)
             {
-                observer.Update(this,difX,difY);
+                observer.Update(this);
             }
         }
     }

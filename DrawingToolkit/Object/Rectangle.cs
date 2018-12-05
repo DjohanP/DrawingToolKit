@@ -172,31 +172,63 @@ namespace DrawingToolkit.Object
 
         public override void FlipVertical(int midY)
         {
-            /*System.Diagnostics.Debug.WriteLine(midY);
-            System.Diagnostics.Debug.WriteLine(this.from);
-            System.Diagnostics.Debug.WriteLine(this.to);*/
-            Point pojokKananAtas = new Point(Math.Max(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
-            Point pojokKiriBawah = new Point(Math.Min(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+            Point pojokKiriAtas = new Point(Math.Min(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
+            Point pojokKananBawah = new Point(Math.Max(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+            Point pojokKananAtas;
+            Point pojokKiriBawah;
+            if(pojokKiriAtas.X<midY)
+            {
+                pojokKananAtas = new Point(pojokKiriAtas.X + 2 * Math.Abs(pojokKiriAtas.X - midY), pojokKiriAtas.Y);
+            }
+            else
+            {
+                pojokKananAtas = new Point(pojokKiriAtas.X - 2 * Math.Abs(pojokKiriAtas.X - midY), pojokKiriAtas.Y);
+            }
 
-            this.from = new Point(pojokKananAtas.X-2*Math.Abs(pojokKananAtas.X-midY),pojokKananAtas.Y);
-            this.to = new Point(pojokKiriBawah.X + 2 * Math.Abs(pojokKiriBawah.X - midY), pojokKiriBawah.Y);
-
-            /*System.Diagnostics.Debug.WriteLine(this.from);
-            System.Diagnostics.Debug.WriteLine(this.to);*/
+            if(pojokKananBawah.X<midY)
+            {
+                pojokKiriBawah = new Point(pojokKananBawah.X + 2 * Math.Abs(pojokKananBawah.X - midY), pojokKananBawah.Y);
+            }
+            else
+            {
+                pojokKiriBawah = new Point(pojokKananBawah.X - 2 * Math.Abs(pojokKananBawah.X - midY), pojokKananBawah.Y);
+            }
+            this.from = new Point(pojokKiriBawah.X, pojokKananAtas.Y);
+            this.to = new Point(pojokKananAtas.X, pojokKiriBawah.Y);
             this.Width = Math.Abs(from.X - to.X);
             this.Height = Math.Abs(from.Y - to.Y);
+            notify();
         }
 
         public override void FlipHorizontal(int midX)
         {
-            Point pojokKananAtas = new Point(Math.Max(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
-            Point pojokKiriBawah = new Point(Math.Min(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+            Point pojokKiriAtas = new Point(Math.Min(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
+            Point pojokKananBawah = new Point(Math.Max(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+            Point pojokKananAtas;
+            Point pojokKiriBawah;
+            if(pojokKiriAtas.Y<midX)
+            {
+                pojokKiriBawah = new Point(pojokKiriAtas.X, pojokKiriAtas.Y + 2 * Math.Abs(pojokKiriAtas.Y - midX));
+            }
+            else
+            {
+                pojokKiriBawah = new Point(pojokKiriAtas.X, pojokKiriAtas.Y - 2 * Math.Abs(pojokKiriAtas.Y - midX));
+            }
+            if(pojokKananBawah.Y<midX)
+            {
+                pojokKananAtas = new Point(pojokKananBawah.X, pojokKananBawah.Y + 2 * Math.Abs(pojokKananBawah.Y - midX));
+            }
+            else
+            {
+                pojokKananAtas = new Point(pojokKananBawah.X, pojokKananBawah.Y - 2 * Math.Abs(pojokKananBawah.Y - midX));
+            }
 
-            this.from = new Point(pojokKiriBawah.X,pojokKiriBawah.Y - 2 * Math.Abs(pojokKiriBawah.Y - midX));
-            this.to = new Point(pojokKananAtas.X,pojokKananAtas.Y + 2 * Math.Abs(pojokKananAtas.Y - midX));
+            this.from = new Point(pojokKiriBawah.X,pojokKananAtas.Y);
+            this.to = new Point(pojokKananAtas.X,pojokKiriBawah.Y);
 
             this.Width = Math.Abs(from.X - to.X);
             this.Height = Math.Abs(from.Y - to.Y);
+            notify();
         }
 
         public override void RotateRight()

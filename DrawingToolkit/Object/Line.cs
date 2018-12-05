@@ -12,8 +12,6 @@ namespace DrawingToolkit.Object
     public class Line : AObject
     {
         private const double EPSILON = 3.0;
-        public Point from { get; set; }
-        public Point to { get; set; }
         private Pen p;
 
         public Line()
@@ -132,16 +130,42 @@ namespace DrawingToolkit.Object
 
         public override void FlipVertical(int midY)
         {
-            Point temp = this.from;
-            this.from = new Point(this.to.X, this.from.Y);
-            this.to = new Point(temp.X, this.to.Y);
+            if (this.from.X<midY)
+            {
+                this.from = new Point(this.from.X+2*Math.Abs(midY-this.from.X), this.from.Y);
+            }
+            else
+            {
+                this.from = new Point(this.from.X - 2 * Math.Abs(midY - this.from.X), this.from.Y);
+            }
+            if (this.to.X<midY)
+            {
+                this.to = new Point(this.to.X + 2 * Math.Abs(midY - this.to.X), this.to.Y);
+            }
+            else
+            {
+                this.to = new Point(this.to.X - 2 * Math.Abs(midY - this.to.X), this.to.Y);
+            }
         }
 
         public override void FlipHorizontal(int midX)
         {
-            Point temp = this.from;
-            this.from = new Point(this.from.X, this.to.Y);
-            this.to = new Point(this.to.X, temp.Y);
+            if (this.from.Y < midX)
+            {
+                this.from = new Point(this.from.X, this.from.Y + 2 * Math.Abs(midX - this.from.Y));
+            }
+            else
+            {
+                this.from = new Point(this.from.X, this.from.Y - 2 * Math.Abs(midX - this.from.Y));
+            }
+            if (this.to.Y < midX)
+            {
+                this.to = new Point(this.to.X,this.to.Y + 2 * Math.Abs(midX - this.to.Y));
+            }
+            else
+            {
+                this.to = new Point(this.to.X, this.to.Y - 2 * Math.Abs(midX - this.to.Y));
+            }
         }
 
         public override void RotateRight()

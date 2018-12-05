@@ -166,5 +166,41 @@ namespace DrawingToolkit.Object
             this.Width = Math.Abs(from.X - to.X);
             this.Height = Math.Abs(from.Y - to.Y);
         }
+
+        public override void FlipVertical(int midY)
+        {
+            Point pojokKananAtas = new Point(Math.Max(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
+            Point pojokKiriBawah = new Point(Math.Min(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+
+            this.from = new Point(pojokKananAtas.X - 2 * Math.Abs(pojokKananAtas.X - midY), pojokKananAtas.Y);
+            this.to = new Point(pojokKiriBawah.X + 2 * Math.Abs(pojokKiriBawah.X - midY), pojokKiriBawah.Y);
+
+            /*System.Diagnostics.Debug.WriteLine(this.from);
+            System.Diagnostics.Debug.WriteLine(this.to);*/
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+        }
+
+        public override void FlipHorizontal(int midX)
+        {
+            Point pojokKananAtas = new Point(Math.Max(this.to.X, this.from.X), Math.Min(this.to.Y, this.from.Y));
+            Point pojokKiriBawah = new Point(Math.Min(this.to.X, this.from.X), Math.Max(this.to.Y, this.from.Y));
+
+            this.from = new Point(pojokKiriBawah.X, pojokKiriBawah.Y - 2 * Math.Abs(pojokKiriBawah.Y - midX));
+            this.to = new Point(pojokKananAtas.X, pojokKananAtas.Y + 2 * Math.Abs(pojokKananAtas.Y - midX));
+
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+        }
+
+        public override void RotateRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RotateLeft()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

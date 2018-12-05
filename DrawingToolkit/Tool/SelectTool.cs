@@ -28,6 +28,11 @@ namespace DrawingToolkit.Tool
             ObjectGroup = new LinkedList<AObject>();
         }
 
+        public AObject GetObjectSelected()
+        {
+            return objectSelected;
+        }
+
         public int banyakObject()
         {
             int j = 0;

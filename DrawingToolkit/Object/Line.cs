@@ -129,5 +129,29 @@ namespace DrawingToolkit.Object
                 this.to = posisi;
             }
         }
+
+        public override void FlipVertical(int midY)
+        {
+            Point temp = this.from;
+            this.from = new Point(this.to.X, this.from.Y);
+            this.to = new Point(temp.X, this.to.Y);
+        }
+
+        public override void FlipHorizontal(int midX)
+        {
+            Point temp = this.from;
+            this.from = new Point(this.from.X, this.to.Y);
+            this.to = new Point(this.to.X, temp.Y);
+        }
+
+        public override void RotateRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RotateLeft()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

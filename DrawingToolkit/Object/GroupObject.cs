@@ -155,5 +155,31 @@ namespace DrawingToolkit.Object
             this.to = new Point(this.to.X + difX, this.to.Y + difY);
             notify();
         }
+
+        public override void FlipVertical(int midY)
+        {
+            foreach(AObject aObject in childs)
+            {
+                aObject.FlipVertical(midY);
+            }
+        }
+
+        public override void FlipHorizontal(int midX)
+        {
+            foreach (AObject aObject in childs)
+            {
+                aObject.FlipHorizontal(midX);
+            }
+        }
+
+        public override void RotateRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RotateLeft()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

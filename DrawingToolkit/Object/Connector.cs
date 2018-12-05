@@ -79,14 +79,6 @@ namespace DrawingToolkit.Object
 
         public override bool Select(Point posisi)
         {
-            double m = GetSlope();
-            double b = to.Y - m * to.X;
-            double y_point = m * posisi.X + b;
-
-            if (Math.Abs(posisi.Y - y_point) < EPSILON)
-            {
-                return true;
-            }
             return false;
         }
 
@@ -105,6 +97,26 @@ namespace DrawingToolkit.Object
             {
                 this.to = new Point((this.last.from.X + this.last.to.X) / 2, (this.last.from.Y + this.last.to.Y) / 2);
             }
+        }
+
+        public override void FlipVertical(int midY)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void FlipHorizontal(int midX)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RotateRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RotateLeft()
+        {
+            throw new NotImplementedException();
         }
     }
 }

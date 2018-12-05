@@ -42,6 +42,12 @@ namespace DrawingToolkit.Interface
         public abstract void Translate(int difX,int difY);
         public abstract void Resize(int posisiClick, Point posisi);
 
+        public abstract void FlipVertical(int midY);
+        public abstract void FlipHorizontal(int midX);
+
+        public abstract void RotateRight();
+        public abstract void RotateLeft();
+
         public virtual void AddChild(LinkedList<AObject> listChild)
         {
 

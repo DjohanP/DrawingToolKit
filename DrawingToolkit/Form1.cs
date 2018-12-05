@@ -313,6 +313,49 @@ namespace DrawingToolkit
             }
         }
 
+        private void verticalToolStripMenuItem_Click(object sender, EventArgs e)//flip
+        {
+            if(toolSelected==selectTool&&selectTool.isActive==true)
+            {
+                AObject selectedObject = selectTool.GetObjectSelected();
+                if(selectedObject!=null)
+                {
+                    selectedObject.FlipVertical((selectedObject.from.X+selectedObject.to.X)/2);
+                    Invalidate();
+                    Refresh();
+                    return;
+                }
+            }
+            //erorr
+        }
+
+        private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)//flip
+        {
+            if (toolSelected == selectTool && selectTool.isActive == true)
+            {
+                AObject selectedObject = selectTool.GetObjectSelected();
+                if (selectedObject != null)
+                {
+                    //System.Diagnostics.Debug.WriteLine("Ada Object");
+
+                    selectedObject.FlipHorizontal((selectedObject.from.Y + selectedObject.to.Y) / 2);
+                    Invalidate();
+                    Refresh();
+                    return;
+                }
+            }
+        }
+
+        private void rightToolStripMenuItem_Click(object sender, EventArgs e)//rotate
+        {
+
+        }
+
+        private void leftToolStripMenuItem_Click(object sender, EventArgs e)//rotate
+        {
+
+        }
+
         private void undoToolStripMenuItem_Click(object sender,EventArgs e)
         {
             reset();

@@ -170,12 +170,18 @@ namespace DrawingToolkit.Object
 
         public override void RotateRight()
         {
-            throw new NotImplementedException();
+            Point tempFrom = new Point(this.from.X,this.from.Y);
+
+            this.from = new Point(this.to.X, this.from.Y);
+            this.to = new Point(tempFrom.X, this.to.Y);
         }
 
         public override void RotateLeft()
         {
-            throw new NotImplementedException();
+            Point tempFrom = new Point(this.from.X, this.from.Y);
+
+            this.from = new Point(this.from.X, this.to.Y);
+            this.to = new Point(this.to.X, tempFrom.Y);
         }
     }
 }

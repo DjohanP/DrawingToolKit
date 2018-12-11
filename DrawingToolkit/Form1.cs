@@ -348,12 +348,32 @@ namespace DrawingToolkit
 
         private void rightToolStripMenuItem_Click(object sender, EventArgs e)//rotate
         {
-
+            if (toolSelected == selectTool && selectTool.isActive == true)
+            {
+                AObject selectedObject = selectTool.GetObjectSelected();
+                if (selectedObject != null)
+                {
+                    selectedObject.RotateRight();
+                    Invalidate();
+                    Refresh();
+                    return;
+                }
+            }
         }
 
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)//rotate
         {
-
+            if (toolSelected == selectTool && selectTool.isActive == true)
+            {
+                AObject selectedObject = selectTool.GetObjectSelected();
+                if (selectedObject != null)
+                {
+                    selectedObject.RotateLeft();
+                    Invalidate();
+                    Refresh();
+                    return;
+                }
+            }
         }
 
         private void undoToolStripMenuItem_Click(object sender,EventArgs e)

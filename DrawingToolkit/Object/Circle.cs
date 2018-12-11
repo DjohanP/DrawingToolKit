@@ -230,12 +230,50 @@ namespace DrawingToolkit.Object
 
         public override void RotateRight()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Debug.WriteLine(this.from);
+            System.Diagnostics.Debug.WriteLine(this.to);
+            int xkiri = ((this.from.X + this.to.X) / 2) - ((this.to.Y - this.from.Y) / 2);
+            int xkanan = ((this.from.X + this.to.X) / 2) + ((this.to.Y - this.from.Y) / 2);
+            int yatas = ((this.from.Y + this.to.Y) / 2) - ((this.to.X - this.from.X) / 2);
+            int ybawah = ((this.from.Y + this.to.Y) / 2) + ((this.to.X - this.from.X) / 2);
+
+
+            this.from = new Point(xkiri, yatas);
+            this.to = new Point(xkanan, ybawah);
+
+            System.Diagnostics.Debug.WriteLine(this.from);
+            System.Diagnostics.Debug.WriteLine(this.to);
+
+
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+            //update center 
+            this.centerPoint = new System.Drawing.Point(Math.Abs(this.from.X - this.to.X) / 2, Math.Abs(this.from.Y - this.to.Y) / 2);
+            notify();
         }
 
         public override void RotateLeft()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Debug.WriteLine(this.from);
+            System.Diagnostics.Debug.WriteLine(this.to);
+            int xkiri = ((this.from.X + this.to.X) / 2) - ((this.to.Y - this.from.Y) / 2);
+            int xkanan = ((this.from.X + this.to.X) / 2) + ((this.to.Y - this.from.Y) / 2);
+            int yatas = ((this.from.Y + this.to.Y) / 2) - ((this.to.X - this.from.X) / 2);
+            int ybawah = ((this.from.Y + this.to.Y) / 2) + ((this.to.X - this.from.X) / 2);
+
+
+            this.from = new Point(xkiri, yatas);
+            this.to = new Point(xkanan, ybawah);
+
+            System.Diagnostics.Debug.WriteLine(this.from);
+            System.Diagnostics.Debug.WriteLine(this.to);
+
+
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+            //update center 
+            this.centerPoint = new System.Drawing.Point(Math.Abs(this.from.X - this.to.X) / 2, Math.Abs(this.from.Y - this.to.Y) / 2);
+            notify();
         }
     }
 }

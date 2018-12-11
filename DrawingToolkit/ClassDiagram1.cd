@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DrawingToolkit.Object.Circle" Collapsed="true">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAABAgAAAAQBAAgAEAAAAICEAAAAEAEQAEAMAA=</HashCode>
+      <FileName>Object\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Object.Line" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAgAAAQQBAAgAAAAAAICEAAAAEAEUAEAMAA=</HashCode>
+      <FileName>Object\Line.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Object.Rectangle" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAABAgAAAAQBAAgAEAAAAICEAAAAEAEQAEAMAA=</HashCode>
+      <FileName>Object\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Object.GroupObject" Collapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAABAgAEAAQBACgAEAAAAICEAAAAEAEQAEAMAA=</HashCode>
+      <FileName>Object\GroupObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Interface.AObject" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAIAAIgAFgAQBIAgAAgAAAIGEAgEAAAERAEAMAA=</HashCode>
+      <FileName>Interface\AObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Interface.ADrawingState" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAEAAAARAAAAAA=</HashCode>
+      <FileName>Interface\ADrawingState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Interface.Observerable" Collapsed="true">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgIAAAAAAAAAAAAAAAAAAACAAAAAQAAAAAA=</HashCode>
+      <FileName>Interface\Observerable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingToolkit.Object.Connector" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAQAAAAAAAgAAAQQBAEgAAAAAAICEAAAAEAEUAEAMgA=</HashCode>
+      <FileName>Object\Connector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

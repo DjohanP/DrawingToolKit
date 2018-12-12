@@ -109,12 +109,12 @@ namespace DrawingToolkit.Object
             throw new NotImplementedException();
         }
 
-        public override void RotateRight()
+        public override void RotateRight(int midX,int midY)
         {
             throw new NotImplementedException();
         }
 
-        public override void RotateLeft()
+        public override void RotateLeft(int midX, int midY)
         {
             throw new NotImplementedException();
         }

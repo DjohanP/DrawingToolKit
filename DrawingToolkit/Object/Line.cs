@@ -168,20 +168,54 @@ namespace DrawingToolkit.Object
             }
         }
 
-        public override void RotateRight()
+        public override void RotateRight(int midX, int midY)
         {
-            Point tempFrom = new Point(this.from.X,this.from.Y);
+            int difXfrom = this.from.X - midX;
+            int difYfrom = this.from.Y - midY;
+
+            int difXto = this.to.X - midX;
+            int difYto = this.to.Y - midY;
+
+            this.from = new Point(-difYfrom + midX, difXfrom + midY);
+            this.to = new Point(-difYto + midX, difXto + midY);
+
+            int minX = Math.Min(this.from.X, this.to.X);
+            int maxX = Math.Max(this.from.X, this.to.X);
+            int minY = Math.Min(this.from.Y, this.to.Y);
+            int maxY = Math.Max(this.from.Y, this.to.Y);
+
+            this.from = new Point(minX, minY);
+            this.to = new Point(maxX, maxY);
+
+            /*Point tempFrom = new Point(this.from.X,this.from.Y);
 
             this.from = new Point(this.to.X, this.from.Y);
-            this.to = new Point(tempFrom.X, this.to.Y);
+            this.to = new Point(tempFrom.X, this.to.Y);*/
         }
 
-        public override void RotateLeft()
+        public override void RotateLeft(int midX, int midY)
         {
-            Point tempFrom = new Point(this.from.X, this.from.Y);
+            int difXfrom = this.from.X - midX;
+            int difYfrom = this.from.Y - midY;
+
+            int difXto = this.to.X - midX;
+            int difYto = this.to.Y - midY;
+
+            this.from = new Point(difYfrom + midX, -difXfrom + midY);
+            this.to = new Point(difYto + midX, -difXto + midY);
+
+            int minX = Math.Min(this.from.X, this.to.X);
+            int maxX = Math.Max(this.from.X, this.to.X);
+            int minY = Math.Min(this.from.Y, this.to.Y);
+            int maxY = Math.Max(this.from.Y, this.to.Y);
+
+            this.from = new Point(minX, minY);
+            this.to = new Point(maxX, maxY);
+
+            /*Point tempFrom = new Point(this.from.X, this.from.Y);
 
             this.from = new Point(this.from.X, this.to.Y);
-            this.to = new Point(this.to.X, tempFrom.Y);
+            this.to = new Point(this.to.X, tempFrom.Y);*/
         }
     }
 }

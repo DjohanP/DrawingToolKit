@@ -172,14 +172,47 @@ namespace DrawingToolkit.Object
             }
         }
 
-        public override void RotateRight()
+        public void UpdateFromTo()
         {
-            throw new NotImplementedException();
+            foreach (AObject aObject in childs)
+            {
+                if (this.from.X > aObject.from.X)
+                {
+                    this.from = new Point(aObject.from.X, this.from.Y);
+                }
+                if (this.from.Y > aObject.from.Y)
+                {
+                    this.from = new Point(this.from.X, aObject.from.Y);
+                }
+                if (this.to.X < aObject.to.X)
+                {
+                    this.to = new Point(aObject.to.X, this.to.Y);
+                }
+                if (this.to.Y < aObject.to.Y)
+                {
+                    this.to = new Point(this.to.X, aObject.to.Y);
+                }
+            }
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
         }
 
-        public override void RotateLeft()
+        public override void RotateRight(int midX,int midY)
         {
-            throw new NotImplementedException();
+            foreach (AObject aObject in childs)
+            {
+                aObject.RotateRight(midX,midY);
+            }
+            UpdateFromTo();
+        }
+
+        public override void RotateLeft(int midX, int midY)
+        {
+            foreach (AObject aObject in childs)
+            {
+                aObject.RotateLeft(midX,midY);
+            }
+            UpdateFromTo();
         }
     }
 }

@@ -45,8 +45,8 @@ namespace DrawingToolkit.Interface
         public abstract void FlipVertical(int midY);
         public abstract void FlipHorizontal(int midX);
 
-        public abstract void RotateRight();
-        public abstract void RotateLeft();
+        public abstract void RotateRight(int midX,int midY);
+        public abstract void RotateLeft(int midX,int midY);
 
         public virtual void AddChild(LinkedList<AObject> listChild)
         {

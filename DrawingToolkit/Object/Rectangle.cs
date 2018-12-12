@@ -231,15 +231,15 @@ namespace DrawingToolkit.Object
             notify();
         }
 
-        public override void RotateRight()
+        public override void RotateRight(int midX, int midY)
         {
             //System.Diagnostics.Debug.WriteLine(this.centerPoint);
-            System.Diagnostics.Debug.WriteLine(this.from);
+            /*System.Diagnostics.Debug.WriteLine(this.from);
             System.Diagnostics.Debug.WriteLine(this.to);
-            int xkiri = ((this.from.X+this.to.X)/2) -((this.to.Y-this.from.Y)/2);
-            int xkanan = ((this.from.X + this.to.X) / 2) + ((this.to.Y - this.from.Y) / 2);
-            int yatas= ((this.from.Y + this.to.Y) / 2) - ((this.to.X - this.from.X) / 2);
-            int ybawah = ((this.from.Y + this.to.Y) / 2) + ((this.to.X - this.from.X) / 2);
+            int xkiri = midX -((this.to.Y-this.from.Y)/2);
+            int xkanan = midX + ((this.to.Y - this.from.Y) / 2);
+            int yatas= midY - ((this.to.X - this.from.X) / 2);
+            int ybawah = midY + ((this.to.X - this.from.X) / 2);
 
 
             this.from = new Point(xkiri,yatas);
@@ -253,17 +253,41 @@ namespace DrawingToolkit.Object
             this.Height = Math.Abs(from.Y - to.Y);
             //update center 
             this.centerPoint= new System.Drawing.Point(Math.Abs(this.from.X - this.to.X)/2, Math.Abs(this.from.Y - this.to.Y) / 2);
+
+            notify();
+            */
+            int difXfrom = this.from.X - midX;
+            int difYfrom = this.from.Y - midY;
+
+            int difXto = this.to.X - midX;
+            int difYto = this.to.Y - midY;
+
+            this.from = new Point(-difYfrom+midX,difXfrom+midY);
+            this.to = new Point(-difYto+midX,difXto+midY);
+
+            int minX = Math.Min(this.from.X, this.to.X);
+            int maxX = Math.Max(this.from.X, this.to.X);
+            int minY = Math.Min(this.from.Y, this.to.Y);
+            int maxY = Math.Max(this.from.Y, this.to.Y);
+
+            this.from = new Point(minX, minY);
+            this.to = new Point(maxX, maxY);
+
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+
+            this.centerPoint = new System.Drawing.Point(Math.Abs(this.from.X - this.to.X) / 2, Math.Abs(this.from.Y - this.to.Y) / 2);
             notify();
         }
 
-        public override void RotateLeft()
+        public override void RotateLeft(int midX, int midY)
         {
-            System.Diagnostics.Debug.WriteLine(this.from);
+            /*System.Diagnostics.Debug.WriteLine(this.from);
             System.Diagnostics.Debug.WriteLine(this.to);
-            int xkiri = ((this.from.X + this.to.X) / 2) - ((this.to.Y - this.from.Y) / 2);
-            int xkanan = ((this.from.X + this.to.X) / 2) + ((this.to.Y - this.from.Y) / 2);
-            int yatas = ((this.from.Y + this.to.Y) / 2) - ((this.to.X - this.from.X) / 2);
-            int ybawah = ((this.from.Y + this.to.Y) / 2) + ((this.to.X - this.from.X) / 2);
+            int xkiri = midX - ((this.to.Y - this.from.Y) / 2);
+            int xkanan = midX + ((this.to.Y - this.from.Y) / 2);
+            int yatas = midY - ((this.to.X - this.from.X) / 2);
+            int ybawah = midY + ((this.to.X - this.from.X) / 2);
 
 
             this.from = new Point(xkiri, yatas);
@@ -276,6 +300,28 @@ namespace DrawingToolkit.Object
             this.Width = Math.Abs(from.X - to.X);
             this.Height = Math.Abs(from.Y - to.Y);
             //update center 
+            this.centerPoint = new System.Drawing.Point(Math.Abs(this.from.X - this.to.X) / 2, Math.Abs(this.from.Y - this.to.Y) / 2);
+            notify();*/
+            int difXfrom = this.from.X - midX;
+            int difYfrom = this.from.Y - midY;
+
+            int difXto = this.to.X - midX;
+            int difYto = this.to.Y - midY;
+
+            this.from = new Point(difYfrom + midX, -difXfrom + midY);
+            this.to = new Point(difYto + midX, -difXto + midY);
+
+            int minX = Math.Min(this.from.X, this.to.X);
+            int maxX = Math.Max(this.from.X, this.to.X);
+            int minY = Math.Min(this.from.Y, this.to.Y);
+            int maxY = Math.Max(this.from.Y, this.to.Y);
+
+            this.from = new Point(minX, minY);
+            this.to = new Point(maxX, maxY);
+
+            this.Width = Math.Abs(from.X - to.X);
+            this.Height = Math.Abs(from.Y - to.Y);
+
             this.centerPoint = new System.Drawing.Point(Math.Abs(this.from.X - this.to.X) / 2, Math.Abs(this.from.Y - this.to.Y) / 2);
             notify();
         }

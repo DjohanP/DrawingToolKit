@@ -353,7 +353,7 @@ namespace DrawingToolkit
                 AObject selectedObject = selectTool.GetObjectSelected();
                 if (selectedObject != null)
                 {
-                    selectedObject.RotateRight();
+                    selectedObject.RotateRight((selectedObject.from.X + selectedObject.to.X) / 2, (selectedObject.from.Y + selectedObject.to.Y) / 2);
                     Invalidate();
                     Refresh();
                     return;
@@ -368,7 +368,7 @@ namespace DrawingToolkit
                 AObject selectedObject = selectTool.GetObjectSelected();
                 if (selectedObject != null)
                 {
-                    selectedObject.RotateLeft();
+                    selectedObject.RotateLeft((selectedObject.from.X + selectedObject.to.X) / 2, (selectedObject.from.Y + selectedObject.to.Y) / 2);
                     Invalidate();
                     Refresh();
                     return;

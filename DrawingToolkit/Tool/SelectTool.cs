@@ -174,6 +174,10 @@ namespace DrawingToolkit.Tool
                     aObject.Draw();
                 }
                 initial = e.Location;
+
+                MoveCommand moveCommand = new MoveCommand(objectSelected, e.X - initial.X, e.Y - initial.Y);
+                moveCommand.ParentForm = ParentForm;
+                ParentForm.Add_Command(moveCommand);
             }
             else
             {
@@ -190,6 +194,10 @@ namespace DrawingToolkit.Tool
                     {
                         objectSelected.Translate(e.X - initial.X, e.Y - initial.Y);
                         //System.Diagnostics.Debug.WriteLine("objectSelected.from");
+                        MoveCommand moveCommand = new MoveCommand(objectSelected, e.X - initial.X, e.Y - initial.Y);
+                        moveCommand.ParentForm = ParentForm;
+                        ParentForm.Add_Command(moveCommand);
+
                         initial = e.Location;
                         objectSelected.DrawObject();
                         objectSelected.DrawHandle();

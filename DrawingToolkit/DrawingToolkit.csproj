@@ -51,6 +51,7 @@
     <Compile Include="Command\DeleteCommand.cs" />
     <Compile Include="Command\GroupCommand.cs" />
     <Compile Include="Command\MoveCommand.cs" />
+    <Compile Include="Command\ResizeCommand.cs" />
     <Compile Include="Command\UngroupCommand.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

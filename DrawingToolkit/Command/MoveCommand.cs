@@ -11,6 +11,7 @@ namespace DrawingToolkit.Command
     {
         AObject obj;
         int difX, difY;
+        public Form1 ParentForm { get; set; }
 
         public MoveCommand(AObject aObject,int xAwal,int yAwal)
         {

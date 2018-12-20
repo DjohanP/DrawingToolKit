@@ -1,4 +1,5 @@
-﻿using DrawingToolkit.Interface;
+﻿using DrawingToolkit.Command;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace DrawingToolkit.Tool
     {
         public bool isActive { set; get; }
         private Line lineObject;
-
+        public Form1 ParentForm { get; set; }
         public LineTool()
         {
             this.isActive = false;
@@ -49,6 +50,10 @@ namespace DrawingToolkit.Tool
             //lineObject.Draw();
             //listObject.Add(lineObject);
             //lineObject.Select();
+            CreateCommand createCommand = new CreateCommand(lineObject);
+            createCommand.ParentForm = ParentForm;
+            ParentForm.Add_Command(createCommand);
+
             lineObject.Deselect();
             lineObject.Draw();
             return lineObject;

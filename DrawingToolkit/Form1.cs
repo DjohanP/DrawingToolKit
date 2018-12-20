@@ -1,3 +1,4 @@
+using DrawingToolkit.Command;
 using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using DrawingToolkit.Tool;
@@ -35,6 +36,7 @@ namespace DrawingToolkit
         private ConnectorTool connectorTool = new ConnectorTool();
         List<AObject> listObject = new List<AObject>();
         private LinkedList<AObject> drawables = new LinkedList<AObject>();
+        private CommandManager commandManager=new CommandManager();
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -174,7 +176,7 @@ namespace DrawingToolkit
                 AObject objectPaint= toolSelected.MouseUp(sender, e, panel1, drawables);
                 if(objectPaint!=null)
                 {
-                    drawables.AddLast(toolSelected.MouseUp(sender, e, panel1, drawables));
+                    drawables.AddLast(objectPaint);
                 }
                 shouldPaint = false;
             }
@@ -211,6 +213,7 @@ namespace DrawingToolkit
             {
                 reset();
                 lineTool.isActive = true;
+                lineTool.ParentForm = this;
                 toolSelected = lineTool;
                 buttonColor();
                 lineToolStripMenuItem.BackColor = Color.Blue;
@@ -231,6 +234,7 @@ namespace DrawingToolkit
             {
                 reset();
                 circleTool.isActive = true;
+                circleTool.ParentForm = this;
                 toolSelected = circleTool;
                 buttonColor();
                 circleToolStripMenuItem.BackColor = Color.Blue;
@@ -252,6 +256,7 @@ namespace DrawingToolkit
                 reset();
                 rectangleTool.isActive = true;
                 toolSelected = rectangleTool;
+                rectangleTool.ParentForm = this;
                 buttonColor();
                 rectangleToolStripMenuItem.BackColor = Color.Blue;
             }
@@ -300,6 +305,7 @@ namespace DrawingToolkit
             {
                 reset();
                 connectorTool.isActive = true;
+                connectorTool.ParentForm = this;
                 toolSelected = connectorTool;
                 buttonColor();
                 connectorToolStripMenuItem.BackColor = Color.Blue;
@@ -378,23 +384,17 @@ namespace DrawingToolkit
 
         private void undoToolStripMenuItem_Click(object sender,EventArgs e)
         {
-            reset();
+            commandManager.Undo();
+            System.Diagnostics.Debug.WriteLine(drawables.Count());
+            this.Invalidate();
             this.Refresh();
-            if (!drawables.Any())
-            {
-                DialogResult box2;
-                box2 = MessageBox.Show("Belum Ada Tindakan", "Error", MessageBoxButtons.RetryCancel);
-                if (box2 == DialogResult.Cancel)
-                {
-                    this.Dispose();
-                }
-            }
-            else
-            {
-                //listObject.RemoveAt(listObject.Count - 1);
-                drawables.RemoveLast();
-                this.Refresh();
-            }
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            commandManager.Redo();
+            this.Invalidate();
+            this.Refresh();
         }
 
         private void deselectObject()
@@ -457,12 +457,20 @@ namespace DrawingToolkit
 
         public void Remove_Object(AObject Object)
         {
+            System.Diagnostics.Debug.WriteLine("Hapus");
             drawables.Remove(Object);
         }
 
         public void Add_Object(AObject Object)
         {
+            System.Diagnostics.Debug.WriteLine("Add");
             drawables.AddLast(Object);
+        }
+
+        public void Add_Command(ICommand command)
+        {
+            System.Diagnostics.Debug.WriteLine("Init");
+            commandManager.ExecuteCommand(command);
         }
     }
 }

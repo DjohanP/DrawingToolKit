@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\CommandManager.cs" />
+    <Compile Include="Command\CreateCommand.cs" />
+    <Compile Include="Command\MoveCommand.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +60,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Interface\ADrawingState.cs" />
+    <Compile Include="Interface\ICommand.cs" />
     <Compile Include="Interface\IObserver.cs" />
     <Compile Include="Interface\Observerable.cs" />
     <Compile Include="Object\Circle.cs" />

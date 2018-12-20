@@ -1,4 +1,5 @@
-﻿using DrawingToolkit.Interface;
+﻿using DrawingToolkit.Command;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace DrawingToolkit.Tool
     {
         public bool isActive { set; get; }
         private Rectangle rectangleObject;
+        public Form1 ParentForm { get; set; }
         public override bool MouseClick(object sender, MouseEventArgs e, LinkedList<AObject> listObject)
         {
             System.Diagnostics.Debug.WriteLine("Click");
@@ -44,6 +46,11 @@ namespace DrawingToolkit.Tool
             //rectangleObject.DrawEdit();
             //rectangleObject.Select();
             rectangleObject.centerPoint = new System.Drawing.Point(Math.Abs(rectangleObject.from.X - rectangleObject.to.X)/2, Math.Abs(rectangleObject.from.Y - rectangleObject.to.Y) / 2);
+
+            CreateCommand createCommand = new CreateCommand(rectangleObject);
+            createCommand.ParentForm = ParentForm;
+            ParentForm.Add_Command(createCommand);
+
             rectangleObject.Deselect();
             rectangleObject.Draw();
             return rectangleObject;

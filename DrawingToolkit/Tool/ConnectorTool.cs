@@ -1,4 +1,5 @@
-﻿using DrawingToolkit.Interface;
+﻿using DrawingToolkit.Command;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace DrawingToolkit.Tool
     {
         public bool isActive { set; get; }
         private Connector connectorObject;
-
+        public Form1 ParentForm { get; set; }
         public override void KeyDown(object sender, KeyEventArgs e, Panel panel1)
         {
 
@@ -77,6 +78,11 @@ namespace DrawingToolkit.Tool
 
             connectorObject.from = new Point((connectorObject.first.from.X + connectorObject.first.to.X) / 2, (connectorObject.first.from.Y + connectorObject.first.to.Y) / 2);
             connectorObject.to = new Point((connectorObject.last.from.X + connectorObject.last.to.X) / 2, (connectorObject.last.from.Y + connectorObject.last.to.Y) / 2);
+
+            CreateCommand createCommand = new CreateCommand(connectorObject);
+            createCommand.ParentForm = ParentForm;
+            ParentForm.Add_Command(createCommand);
+
             panel1.Invalidate();
             //panel1.Refresh();
             return connectorObject;

@@ -1,4 +1,5 @@
-﻿using DrawingToolkit.Interface;
+﻿using DrawingToolkit.Command;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace DrawingToolkit.Tool
     {
         public bool isActive { set; get; }
         private Circle circleObject;
+        public Form1 ParentForm { get; set; }
 
         public override bool MouseClick(object sender, MouseEventArgs e, LinkedList<AObject> listObject)
         {
@@ -42,6 +44,12 @@ namespace DrawingToolkit.Tool
             circleObject.to = e.Location;
             circleObject.Width = Math.Abs(e.X - circleObject.from.X);
             circleObject.Height = Math.Abs(e.Y - circleObject.from.Y);
+
+            CreateCommand createCommand = new CreateCommand(circleObject);
+            createCommand.ParentForm = ParentForm;
+            ParentForm.Add_Command(createCommand);
+            //ParentForm.Remove_Object(circleObject);
+            
             //circleObject.Select();
             circleObject.Deselect();
             circleObject.Draw();

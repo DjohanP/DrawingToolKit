@@ -1,4 +1,5 @@
-﻿using DrawingToolkit.Interface;
+﻿using DrawingToolkit.Command;
+using DrawingToolkit.Interface;
 using DrawingToolkit.Object;
 using System;
 using System.Collections.Generic;
@@ -212,6 +213,10 @@ namespace DrawingToolkit.Tool
             //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " Pencet.");
             if (e.KeyCode == Keys.Delete && objectSelected!=null)
             {
+                DeleteCommand deleteCommand = new DeleteCommand(objectSelected);
+                deleteCommand.ParentForm = ParentForm;
+                ParentForm.Add_Command(deleteCommand);
+
                 ParentForm.Remove_Object(objectSelected);
                 objectSelected = null;
                 //System.Diagnostics.Debug.WriteLine(e.KeyCode.ToString() + " Oke.");
@@ -222,12 +227,18 @@ namespace DrawingToolkit.Tool
                 groupObject.setGraphics(panel1.CreateGraphics());
                 groupObject.AddChild(ObjectGroup);
 
-                foreach(AObject aObject in ObjectGroup)
+                GroupCommand groupCommand = new GroupCommand(groupObject);
+                groupCommand.ObjectGroup = ObjectGroup;
+                groupCommand.ParentForm = ParentForm;
+                ParentForm.Add_Command(groupCommand);
+
+                foreach (AObject aObject in ObjectGroup)
                 {
                     aObject.Deselect();
                     ParentForm.Remove_Object(aObject);
                 }
                 groupObject.Deselect();
+                
                 ParentForm.Add_Object(groupObject);
                 ObjectGroup = new LinkedList<AObject>();
                 controlClick = false;
@@ -238,6 +249,12 @@ namespace DrawingToolkit.Tool
             else if(e.Control&&e.Shift&&e.KeyCode==Keys.G&&objectSelected!=null)
             {
                 LinkedList<AObject> child=objectSelected.RemoveChild();
+
+                UngroupCommand ungroupCommand = new UngroupCommand(objectSelected);
+                ungroupCommand.ObjectGroup = child;
+                ungroupCommand.ParentForm = ParentForm;
+                ParentForm.Add_Command(ungroupCommand);
+
                 ParentForm.Remove_Object(objectSelected);
                 foreach(AObject aObject in child)
                 {
